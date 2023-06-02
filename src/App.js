@@ -20,9 +20,9 @@ function App() {
   return (
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} color='inherit' position='static'>
-        <Typography className={classes.heading} variant='h2' align='center'>
+        <Typography className={classes.heading} variant='h4' align='center'>
           PicTrek
-          <img className={classes.image} src={Logo} alt='pictrek logo' height='60'></img>
+          <img className={classes.image} src={Logo} alt='pictrek logo' height='50'></img>
         </Typography>
       </AppBar>
       <Grow in>
