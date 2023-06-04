@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import usestyles from "./styles";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from 'react-file-base64';
+import { useDispatch } from "react-redux";
+import { createPost } from "../../actions/posts";
 
 const Form = () => {
-  
+  const [postData , setPostData] = useState({ creator:'', title:'' , message:'', tags:'', selectedFile:''});  
   const classes = usestyles();
-  const [postData , setPostData] = useState({ creator:'', title:'' , message:'', tags:'', selectedFile:''})
-  console.log(postData)
-  const handleSubmit = () => {
-    console.log("Hello world");
+  const dispatch = useDispatch();
+  //console.log(postData)
+  const handleSubmit = (e) => {
+    console.log('click')
+    e.preventDefault();
+    dispatch(createPost(postData));
   };
+  const clear = () =>{
+    console.log('clear')
+  }
   return (
     <Paper className={classes.paper}>
       <form
@@ -58,6 +65,12 @@ const Form = () => {
       <div className={classes.fileInput}>
         <FileBase type="file" multiple={false} onDone={({base64})=> setPostData({...postData, selectedFile: base64})}/>
       </div>
+      <Button onClick={handleSubmit} className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>
+        Submit
+      </Button>
+      <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>
+        Clear
+      </Button>
     </Paper>
   );
 };
